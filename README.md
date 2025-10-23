@@ -105,3 +105,14 @@ usuarios_info * on(id) group_left(pais, plano) (usuarios_atividade or on() vecto
 - Configure **Refresh Interval** do painel, por exemplo **5s**, para acompanhar a atualização em tempo real do seu exporter.
 
 ---
+
+## Font family
+
+- https://fonts.google.com/selection?preview.text=Testando
+
+---
+
+## Plugins
+
+- HTML graphics
+- Business Text
