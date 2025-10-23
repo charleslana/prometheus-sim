@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ff1q8t9nswsg0a"
+        "uid": "df1xtamr2mb5sf"
       },
       "fieldConfig": {
         "defaults": {
@@ -110,7 +110,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ff1q8t9nswsg0a"
+        "uid": "df1xtamr2mb5sf"
       },
       "fieldConfig": {
         "defaults": {
@@ -139,7 +139,7 @@
       "id": 4,
       "options": {
         "afterRender": "",
-        "content": "<div style=\"\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  background: linear-gradient(135deg, #0a0f2c, #1a274a);\n  border-radius: 12px;\n  box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);\n  color: white;\n  font-family: 'Segoe UI', sans-serif;\n  text-align: center;\n\">\n  <div style=\"font-size: 28px; letter-spacing: 1px; margin-bottom: 10px;\">\n    VALOR\n  </div>\n\n  <div style=\"\n    font-size: 46px;\n    font-weight: bold;\n    color: #37ff6b;\n  \">\n    {{ Value }}%\n  </div>\n</div>\n",
+        "content": "<div style=\"\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  background: linear-gradient(135deg, #0a0f2c, #1a274a);\n  border-radius: 12px;\n  box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);\n  color: white;\n  font-family: 'Segoe UI', sans-serif;\n  text-align: center;\n\">\n  <div style=\"font-size: 28px; letter-spacing: 1px; margin-bottom: 10px;\">\n    CPF\n  </div>\n\n  <div style=\"\n    font-size: 46px;\n    font-weight: bold;\n    color: #37ff6b;\n  \">\n    {{ cpf }}\n  </div>\n</div>\n```json\n{{{json @root}}}\n```",
         "contentPartials": [],
         "defaultContent": "The query didn't return any results.",
         "editor": {
@@ -157,7 +157,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "usuarios_info * on(id) group_left(pais, plano) (usuarios_atividade or on() vector(0))",
+          "expr": "usuarios_info * on(id) group_left(rua, numero, cidade, estado, pais) usuarios_endereco",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -174,6 +174,10 @@
               "firstNotNull"
             ]
           }
+        },
+        {
+          "id": "labelsToFields",
+          "options": {}
         }
       ],
       "transparent": true,
@@ -182,7 +186,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ff1q8t9nswsg0a"
+        "uid": "df1xtamr2mb5sf"
       },
       "fieldConfig": {
         "defaults": {
@@ -224,6 +228,7 @@
       "id": 1,
       "options": {
         "cellHeight": "sm",
+        "frameIndex": 0,
         "showHeader": true
       },
       "pluginVersion": "12.2.1",
@@ -234,20 +239,26 @@
             "uid": "ff1q8t9nswsg0a"
           },
           "editorMode": "code",
-          "expr": "usuarios_info * on(id) group_left(pais, plano) (usuarios_atividade or on() vector(0))",
+          "expr": "usuarios_info * on(id) group_left(rua, numero, cidade, estado, pais) usuarios_endereco",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "New panel",
+      "title": "Tabela",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        }
+      ],
       "transparent": true,
       "type": "table"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ff1q8t9nswsg0a"
+        "uid": "df1xtamr2mb5sf"
       },
       "fieldConfig": {
         "defaults": {
@@ -299,13 +310,13 @@
             "uid": "ff1q8t9nswsg0a"
           },
           "editorMode": "code",
-          "expr": "usuarios_info * on(id) group_left(pais, plano) (usuarios_atividade or on() vector(0))",
+          "expr": "count(usuarios_info{nome=\"Paula Souza\"} * on(id) group_left(rua, numero, cidade, estado, pais) usuarios_endereco)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "New panel",
+      "title": "Paula souza",
       "transformations": [
         {
           "id": "reduce",
@@ -335,5 +346,5 @@
   "timezone": "browser",
   "title": "Testes Prometheus",
   "uid": "adfd675",
-  "version": 16
+  "version": 10
 }
